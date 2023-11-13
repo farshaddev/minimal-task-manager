@@ -1,0 +1,10 @@
+.todo-container {
+	display: flex;
+	width: calc(100% - 345px);
+	height: 100vh;
+	overflow-y: auto;
+	&__content {
+		width: 100%;
+		padding: 0 3em;
+	}
+}
