@@ -3,12 +3,8 @@
 	"version": "0.1.0",
 	"private": true,
 	"dependencies": {
-		"@testing-library/user-event": "^13.5.0",
-		"@types/jest": "^27.5.2",
-		"@types/node": "^16.18.61",
-		"@types/react": "^18.2.37",
-		"@types/react-dom": "^18.2.15",
 		"antd": "^5.11.1",
+		"axios": "^1.6.1",
 		"react": "^18.2.0",
 		"react-dom": "^18.2.0",
 		"react-icons": "^4.11.0",
@@ -43,6 +39,11 @@
 	"devDependencies": {
 		"@testing-library/jest-dom": "^6.1.4",
 		"@testing-library/react": "^14.1.0",
+		"@testing-library/user-event": "^13.5.0",
+		"@types/jest": "^29.5.8",
+		"@types/node": "^16.18.61",
+		"@types/react": "^18.2.37",
+		"@types/react-dom": "^18.2.15",
 		"sass": "^1.69.5"
 	}
 }
