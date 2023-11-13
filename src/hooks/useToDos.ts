@@ -2,8 +2,14 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import { todoType } from "../types/todo";
 
-export const useToDos = () => {
+interface UseToDosResult {
+	toDos: todoType[];
+	loading: boolean;
+}
+
+export const useToDos = (): UseToDosResult => {
 	const [toDos, setToDos] = useState<todoType[]>([]);
+	const [loading, setLoading] = useState(true);
 
 	const fetchToDos = async () => {
 		try {
@@ -16,6 +22,8 @@ export const useToDos = () => {
 			}
 		} catch (error) {
 			console.error("Error fetching todos:", error);
+		} finally {
+			setLoading(false);
 		}
 	};
 
@@ -23,5 +31,5 @@ export const useToDos = () => {
 		fetchToDos();
 	}, []);
 
-	return { toDos };
+	return { toDos, loading };
 };
