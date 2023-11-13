@@ -1,0 +1,30 @@
+.todo-card {
+	.ant-checkbox-checked + span {
+		text-decoration-line: line-through;
+		color: #555555;
+	}
+
+	&__content {
+		display: flex;
+		justify-content: space-between;
+		&-assignment {
+			display: flex;
+			gap: 0.4em;
+			&-label {
+				font-size: 1em;
+			}
+			&-avatar {
+				transition: all 0.2s ease-in;
+				cursor: pointer;
+
+				&:hover {
+					transform: scale(1.2);
+				}
+			}
+		}
+		&-actions {
+			display: flex;
+			gap: 0.4em;
+		}
+	}
+}

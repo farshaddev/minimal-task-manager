@@ -1,0 +1,28 @@
+.action-btn {
+	background-color: #ffffff;
+	border-radius: 100%;
+	border: 1px solid #dddddd;
+	width: 2em;
+	height: 2em;
+	font-size: 1em;
+	display: flex;
+	align-items: center;
+	cursor: pointer;
+	transition: all 0.2s ease-in;
+
+	&--edit {
+		color: #0984e3;
+
+		&:hover {
+			color: #ffffff;
+			background-color: #0984e3;
+		}
+	}
+	&--delete {
+		color: #ff0000;
+		&:hover {
+			color: #ffffff;
+			background-color: #ff0000;
+		}
+	}
+}
