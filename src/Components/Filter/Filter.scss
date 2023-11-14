@@ -1,0 +1,23 @@
+.filter {
+	background-color: #ffffff;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 0 1em;
+
+	&__caption {
+		color: #0984e3;
+		font-size: 1.5em;
+	}
+	&__inputs {
+		display: flex;
+		align-items: center;
+		gap: 1em;
+	}
+
+	.ant-btn-primary {
+		display: flex;
+		align-items: center;
+		gap: 0.4em;
+	}
+}
