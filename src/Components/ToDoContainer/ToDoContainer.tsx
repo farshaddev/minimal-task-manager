@@ -33,12 +33,10 @@ const ToDoContainer: React.FC = () => {
 							{users?.length > 0 && toDos?.length > 0 ? (
 								toDos.map((todo) => (
 									<Col md={12} key={todo.id}>
-										<ErrorBoundary>
-											<ToDoCard
-												{...todo}
-												user={users.find((user) => user.id === todo.userId)}
-											/>
-										</ErrorBoundary>
+										<ToDoCard
+											{...todo}
+											user={users.find((user) => user.id === todo.userId)}
+										/>
 									</Col>
 								))
 							) : (
@@ -55,31 +53,3 @@ const ToDoContainer: React.FC = () => {
 };
 
 export default ToDoContainer;
-
-class ErrorBoundary extends React.Component {
-	// @ts-ignore
-	constructor(props) {
-		super(props);
-		this.state = { hasError: false };
-	}
-
-	// @ts-ignore
-	static getDerivedStateFromError(error) {
-		return { hasError: true };
-	}
-
-	// @ts-ignore
-	componentDidCatch(error, errorInfo) {
-		console.error("Error caught by error boundary:", error, errorInfo);
-	}
-
-	render() {
-		// @ts-ignore
-		if (this.state.hasError) {
-			return <div>Something went wrong.</div>;
-		}
-
-		// @ts-ignore
-		return this.props.children;
-	}
-}
