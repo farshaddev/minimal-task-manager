@@ -1,4 +1,3 @@
-// ToDoContainer.tsx
 import React, { useState, useEffect } from "react";
 import ToDoCard from "../ToDoCard/ToDoCard";
 import { Row, Col, Card, Empty } from "antd";
@@ -6,31 +5,106 @@ import "./ToDoContainer.scss";
 import { useToDos } from "../../hooks/useToDos";
 import { useUsers } from "../../hooks/useUsers";
 import Search from "../Search/Search";
+import Filter from "../Filter/Filter";
 import { todoType } from "../../types/todo";
+import { UserType } from "../../types/user";
 
 const ToDoContainer: React.FC = () => {
 	const { users, loading: usersLoading } = useUsers();
 	const { toDos, loading: toDosLoading } = useToDos();
-	const [filteredToDos, setFilteredToDos] = useState<todoType[]>([]);
+	const [filteredToDos, setFilteredToDos] = useState<todoType[]>(toDos);
+	const [currentFilters, setCurrentFilters] = useState<{
+		title: string;
+		completed: boolean | null;
+		username: string;
+	}>({
+		title: "",
+		completed: null,
+		username: "",
+	});
 
 	useEffect(() => {
-		setFilteredToDos(toDos);
-	}, [toDos]);
+		applyFilters();
+	}, [toDos, currentFilters]);
 
-	const onSearch = (event: React.ChangeEvent<HTMLInputElement>): void => {
-		const title = event.target.value;
-		const filtered = toDos.filter((toDo) => toDo.title.includes(title));
+	const applyFilters = () => {
+		let filtered = toDos;
+
+		if (currentFilters.title) {
+			filtered = filtered.filter((toDo) =>
+				toDo.title.includes(currentFilters.title)
+			);
+		}
+
+		if (currentFilters.completed !== null) {
+			filtered = filtered.filter(
+				(toDo) => toDo.completed === currentFilters.completed
+			);
+		}
+
+		if (currentFilters.username) {
+			const userId = users.find(
+				(user) => user.username === currentFilters.username
+			)?.id;
+			if (userId) {
+				filtered = filtered.filter((toDo) => toDo.userId === userId);
+			}
+		}
+
 		setFilteredToDos(filtered);
+	};
+
+	const onSearch = (title: string): void => {
+		setCurrentFilters((prevFilters) => ({
+			...prevFilters,
+			title,
+		}));
+	};
+
+	const onState = (completed: boolean): void => {
+		setCurrentFilters((prevFilters) => ({
+			...prevFilters,
+			completed,
+		}));
+	};
+
+	const onClear = (): void => {
+		setCurrentFilters({
+			title: "",
+			completed: null,
+			username: "",
+		});
+	};
+
+	const onUser = (username: string): void => {
+		setCurrentFilters((prevFilters) => ({
+			...prevFilters,
+			username,
+		}));
 	};
 
 	return (
 		<div className="todo-container">
-			<div className="todo-container__filter">
-				<Search onSearch={onSearch} />
+			<div className="todo-container__header">
+				<Search title={currentFilters.title} onSearch={onSearch} />
+				<Filter
+					users={users}
+					onState={onState}
+					onUser={onUser}
+					onClear={onClear}
+				/>
 			</div>
-			<div className="todo-container__content">
+			<div
+				className={
+					!usersLoading &&
+					!toDosLoading &&
+					(users?.length < 1 || filteredToDos.length < 1)
+						? "todo-container__content todo-container__content--align-center"
+						: "todo-container__content"
+				}
+			>
 				<Row gutter={[16, 16]}>
-					{usersLoading || toDosLoading ? (
+					{usersLoading && toDosLoading ? (
 						<>
 							<Col md={12}>
 								<Card
@@ -52,7 +126,11 @@ const ToDoContainer: React.FC = () => {
 									<Col md={12} key={todo.id}>
 										<ToDoCard
 											{...todo}
-											user={users.find((user) => user.id === todo.userId)}
+											user={
+												users.find(
+													(user) => user.id === todo.userId
+												) as UserType
+											}
 										/>
 									</Col>
 								))

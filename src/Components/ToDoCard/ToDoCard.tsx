@@ -12,7 +12,7 @@ interface ToDoCardProps extends todoType {
 	onChange?: (e: CheckboxChangeEvent) => void;
 }
 
-const ToDoCard: React.FC<ToDoCardProps> = ({ title, user }) => {
+const ToDoCard: React.FC<ToDoCardProps> = ({ title, user, completed }) => {
 	const [isModalOpen, setIsModalOpen] = useState(false);
 
 	const onChange = (e: CheckboxChangeEvent) => {
@@ -30,7 +30,11 @@ const ToDoCard: React.FC<ToDoCardProps> = ({ title, user }) => {
 	return (
 		<>
 			<Card
-				title={<Checkbox onChange={onChange}>{title}</Checkbox>}
+				title={
+					<Checkbox checked={completed} onChange={onChange}>
+						{title}
+					</Checkbox>
+				}
 				bordered={false}
 				className="todo-card"
 			>

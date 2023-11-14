@@ -5,8 +5,22 @@
 	overflow-y: auto;
 	flex-direction: column;
 
+	&__header {
+		display: flex;
+		flex-direction: column;
+	}
+
 	&__content {
 		width: 100%;
 		padding: 1em 3em;
+		height: 100vh;
+		display: block;
+		overflow-y: auto;
+
+		&--align-center {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		}
 	}
 }
