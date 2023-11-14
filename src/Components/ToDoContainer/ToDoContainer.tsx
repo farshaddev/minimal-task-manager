@@ -1,16 +1,33 @@
-import React from "react";
+// ToDoContainer.tsx
+import React, { useState, useEffect } from "react";
 import ToDoCard from "../ToDoCard/ToDoCard";
 import { Row, Col, Card, Empty } from "antd";
 import "./ToDoContainer.scss";
 import { useToDos } from "../../hooks/useToDos";
 import { useUsers } from "../../hooks/useUsers";
+import Search from "../Search/Search";
+import { todoType } from "../../types/todo";
 
 const ToDoContainer: React.FC = () => {
 	const { users, loading: usersLoading } = useUsers();
 	const { toDos, loading: toDosLoading } = useToDos();
+	const [filteredToDos, setFilteredToDos] = useState<todoType[]>([]);
+
+	useEffect(() => {
+		setFilteredToDos(toDos);
+	}, [toDos]);
+
+	const onSearch = (event: React.ChangeEvent<HTMLInputElement>): void => {
+		const title = event.target.value;
+		const filtered = toDos.filter((toDo) => toDo.title.includes(title));
+		setFilteredToDos(filtered);
+	};
 
 	return (
 		<div className="todo-container">
+			<div className="todo-container__filter">
+				<Search onSearch={onSearch} />
+			</div>
 			<div className="todo-container__content">
 				<Row gutter={[16, 16]}>
 					{usersLoading || toDosLoading ? (
@@ -30,8 +47,8 @@ const ToDoContainer: React.FC = () => {
 						</>
 					) : (
 						<>
-							{users?.length > 0 && toDos?.length > 0 ? (
-								toDos.map((todo) => (
+							{users?.length > 0 && filteredToDos.length > 0 ? (
+								filteredToDos.map((todo) => (
 									<Col md={12} key={todo.id}>
 										<ToDoCard
 											{...todo}
