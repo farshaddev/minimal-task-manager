@@ -6,13 +6,13 @@ import { useToDos } from "../../hooks/useToDos";
 import { useUsers } from "../../hooks/useUsers";
 import Search from "../Search/Search";
 import Filter from "../Filter/Filter";
-import { todoType } from "../../types/todo";
+import { TodoType } from "../../types/todo";
 import { UserType } from "../../types/user";
 
 const ToDoContainer: React.FC = () => {
 	const { users, loading: usersLoading } = useUsers();
 	const { toDos, loading: toDosLoading } = useToDos();
-	const [filteredToDos, setFilteredToDos] = useState<todoType[]>(toDos);
+	const [filteredToDos, setFilteredToDos] = useState<TodoType[]>(toDos);
 	const [currentFilters, setCurrentFilters] = useState<{
 		title: string;
 		completed: boolean | null;

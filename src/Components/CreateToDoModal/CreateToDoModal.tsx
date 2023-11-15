@@ -1,7 +1,9 @@
-import React from "react";
-import { Button, Form, Modal, Input, Select } from "antd";
+import React, { useState } from "react";
+import { Button, Form, Modal, Input, Select, notification } from "antd";
 import { UserType } from "../../types/user";
 import "./CreateToDoModal.scss";
+import axios from "axios";
+import { TodoType } from "../../types/todo";
 
 interface CreateToDoModalProps {
 	isModalOpen: boolean;
@@ -21,8 +23,33 @@ const CreateToDoModal: React.FC<CreateToDoModalProps> = ({
 	handleCancel,
 	users,
 }) => {
-	const onFinish = (values: any) => {
-		console.log("Success:", values);
+	const [form] = Form.useForm();
+	const [loading, setLoading] = useState(false);
+
+	const onFinish = async () => {
+		setLoading(true);
+		const { title, userId } = form.getFieldsValue();
+
+		try {
+			const response = await axios.post<TodoType>(
+				"https://jsonplaceholder.typicode.com/todos",
+				{
+					title: title,
+					userId: userId,
+				}
+			);
+
+			setLoading(false);
+			notification.success({
+				message: "Mock Task Created Successfully!",
+				description: `"${response.data.title}" has been created. Please note that this creation is "Mock" and won't update the todo list.`,
+			});
+			form.resetFields();
+			handleOk();
+		} catch (error) {
+			setLoading(false);
+			console.error("Error:", error);
+		}
 	};
 
 	const onFinishFailed = (errorInfo: any) => {
@@ -42,25 +69,13 @@ const CreateToDoModal: React.FC<CreateToDoModalProps> = ({
 		<Modal
 			title="New Task"
 			open={isModalOpen}
-			onOk={handleOk}
 			onCancel={handleCancel}
 			className="create-todo"
-			footer={[
-				<Button key="back" onClick={handleCancel}>
-					Cancel
-				</Button>,
-				<Button
-					key="submit"
-					type="primary"
-					// loading={loading}
-					onClick={handleOk}
-				>
-					Submit
-				</Button>,
-			]}
+			footer={null}
 		>
 			<Form
-				name="todo-form"
+				form={form}
+				name="todoForm"
 				className="todo-form"
 				onFinish={onFinish}
 				onFinishFailed={onFinishFailed}
@@ -73,7 +88,6 @@ const CreateToDoModal: React.FC<CreateToDoModalProps> = ({
 				>
 					<Input />
 				</Form.Item>
-
 				<Form.Item<FieldType>
 					label="Assign To"
 					name="userId"
@@ -96,12 +110,19 @@ const CreateToDoModal: React.FC<CreateToDoModalProps> = ({
 						}))}
 					/>
 				</Form.Item>
-
-				{/* <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-					<Button type="primary" htmlType="submit">
+				<div className="ant-modal-footer">
+					<Button key="back" onClick={handleCancel}>
+						Cancel
+					</Button>
+					<Button
+						key="submit"
+						htmlType="submit"
+						type="primary"
+						loading={loading}
+					>
 						Submit
 					</Button>
-				</Form.Item> */}
+				</div>
 			</Form>
 		</Modal>
 	);

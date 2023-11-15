@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import { Avatar, Card, Checkbox } from "antd";
 import type { CheckboxChangeEvent } from "antd/es/checkbox";
-import { todoType } from "../../types/todo";
+import { TodoType } from "../../types/todo";
 import { UserType } from "../../types/user";
 import ActionBtn from "../ActionBtn/ActionBtn";
 import "./ToDoCard.scss";
 import UserModal from "../UserModal/UserModal";
 
-interface ToDoCardProps extends todoType {
+interface ToDoCardProps extends TodoType {
 	user?: UserType | undefined;
 	onChange?: (e: CheckboxChangeEvent) => void;
 }
