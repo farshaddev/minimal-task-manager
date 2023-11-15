@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import ToDoCard from "../ToDoCard/ToDoCard";
 import { Row, Col, Card, Empty } from "antd";
 import "./ToDoContainer.scss";
@@ -7,7 +7,6 @@ import { useUsers } from "../../hooks/useUsers";
 import Search from "../Search/Search";
 import Filter from "../Filter/Filter";
 import { TodoType } from "../../types/todo";
-import { UserType } from "../../types/user";
 
 const ToDoContainer: React.FC = () => {
 	const { users, loading: usersLoading } = useUsers();
@@ -23,11 +22,7 @@ const ToDoContainer: React.FC = () => {
 		username: "",
 	});
 
-	useEffect(() => {
-		applyFilters();
-	}, [toDos, currentFilters]);
-
-	const applyFilters = () => {
+	const applyFilters = useCallback(() => {
 		let filtered = toDos;
 
 		if (currentFilters.title) {
@@ -52,7 +47,11 @@ const ToDoContainer: React.FC = () => {
 		}
 
 		setFilteredToDos(filtered);
-	};
+	}, [currentFilters, toDos, users]);
+
+	useEffect(() => {
+		applyFilters();
+	}, [toDos, currentFilters, applyFilters]);
 
 	const onSearch = (title: string): void => {
 		setCurrentFilters((prevFilters) => ({

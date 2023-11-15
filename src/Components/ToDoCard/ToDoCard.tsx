@@ -53,7 +53,7 @@ const ToDoCard: React.FC<ToDoCardProps> = ({
 	const handleDelete = async () => {
 		setLoading(true);
 		try {
-			const response = await axios.delete<TodoType>(
+			await axios.delete<TodoType>(
 				`https://jsonplaceholder.typicode.com/todos/${id}`
 			);
 
