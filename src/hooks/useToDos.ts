@@ -1,19 +1,19 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
-import { todoType } from "../types/todo";
+import { TodoType } from "../types/todo";
 
 interface UseToDosResult {
-	toDos: todoType[];
+	toDos: TodoType[];
 	loading: boolean;
 }
 
 export const useToDos = (): UseToDosResult => {
-	const [toDos, setToDos] = useState<todoType[]>([]);
+	const [toDos, setToDos] = useState<TodoType[]>([]);
 	const [loading, setLoading] = useState(true);
 
 	const fetchToDos = async () => {
 		try {
-			const response = await axios.get<todoType[]>(
+			const response = await axios.get<TodoType[]>(
 				"https://jsonplaceholder.typicode.com/todos"
 			);
 

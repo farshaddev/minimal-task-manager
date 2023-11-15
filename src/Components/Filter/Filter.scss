@@ -13,6 +13,10 @@
 		display: flex;
 		align-items: center;
 		gap: 1em;
+
+		.ant-form-item {
+			margin: 0;
+		}
 	}
 
 	.ant-btn-primary {
