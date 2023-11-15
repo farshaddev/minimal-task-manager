@@ -7,10 +7,13 @@ import { useUsers } from "../../hooks/useUsers";
 import Search from "../Search/Search";
 import Filter from "../Filter/Filter";
 import { TodoType } from "../../types/todo";
+import ToggleMenuBtn from "../ToggleMenuBtn/ToggleMenuBtn";
+import { useMenu } from "../../contexts/MenuContext";
 
 const ToDoContainer: React.FC = () => {
 	const { users, loading: usersLoading } = useUsers();
 	const { toDos, loading: toDosLoading } = useToDos();
+	const { isMenuOpen } = useMenu();
 	const [filteredToDos, setFilteredToDos] = useState<TodoType[]>(toDos);
 	const [currentFilters, setCurrentFilters] = useState<{
 		title: string;
@@ -97,9 +100,18 @@ const ToDoContainer: React.FC = () => {
 	const showEmpty = users?.length > 0 && filteredToDos.length > 0;
 
 	return (
-		<div className="todo-container">
+		<div
+			className={
+				isMenuOpen
+					? "todo-container todo-container--menu-open"
+					: "todo-container"
+			}
+		>
 			<div className="todo-container__header">
-				<Search title={currentFilters.title} onSearch={onSearch} />
+				<div className="todo-container__header-search">
+					<ToggleMenuBtn />
+					<Search title={currentFilters.title} onSearch={onSearch} />
+				</div>
 				<Filter
 					users={users}
 					onState={onState}
@@ -117,13 +129,13 @@ const ToDoContainer: React.FC = () => {
 				<Row gutter={[16, 16]}>
 					{showLoading ? (
 						<>
-							<Col md={12}>
+							<Col md={12} xs={24}>
 								<Card
 									style={{ width: "100%", height: 131 }}
 									loading={true}
 								></Card>
 							</Col>
-							<Col md={12}>
+							<Col md={12} xs={24}>
 								<Card
 									style={{ width: "100%", height: 131 }}
 									loading={true}
@@ -134,12 +146,12 @@ const ToDoContainer: React.FC = () => {
 						<>
 							{showEmpty ? (
 								filteredToDos.map((todo) => (
-									<Col md={12} key={todo.id}>
+									<Col md={12} xs={24} key={todo.id}>
 										<ToDoCard {...todo} users={users} />
 									</Col>
 								))
 							) : (
-								<Col md={24}>
+								<Col xs={24}>
 									<Empty description="No to-dos available" />
 								</Col>
 							)}

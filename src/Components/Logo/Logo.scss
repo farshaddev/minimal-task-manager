@@ -8,9 +8,18 @@
 
 	&__icon {
 		color: #0984e3;
+		font-size: 1em;
+		flex: none;
 	}
 
 	&__text {
+		white-space: nowrap;
 		color: #333;
+	}
+
+	@media (max-width: 410px) {
+		&__text {
+			font-size: 0.8em;
+		}
 	}
 }
