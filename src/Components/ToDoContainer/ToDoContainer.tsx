@@ -124,14 +124,7 @@ const ToDoContainer: React.FC = () => {
 							{users?.length > 0 && filteredToDos.length > 0 ? (
 								filteredToDos.map((todo) => (
 									<Col md={12} key={todo.id}>
-										<ToDoCard
-											{...todo}
-											user={
-												users.find(
-													(user) => user.id === todo.userId
-												) as UserType
-											}
-										/>
+										<ToDoCard {...todo} users={users} />
 									</Col>
 								))
 							) : (

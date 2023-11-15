@@ -6,13 +6,14 @@ type ActionType = "edit" | "delete";
 
 interface ActionBtnProps {
 	type: ActionType;
+	onClick?: () => void;
 }
 
-const ActionBtn: React.FC<ActionBtnProps> = ({ type }) => {
+const ActionBtn: React.FC<ActionBtnProps> = ({ type, onClick }) => {
 	const buttonClassName = `action-btn action-btn--${type}`;
 
 	return (
-		<button className={buttonClassName}>
+		<button type="button" onClick={onClick} className={buttonClassName}>
 			{type === "edit" ? <MdModeEdit /> : <MdOutlineDeleteOutline />}
 		</button>
 	);

@@ -1,15 +1,22 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Button, Form, Modal, Input, Select, notification } from "antd";
 import { UserType } from "../../types/user";
-import "./CreateToDoModal.scss";
+import "./EditToDoModal.scss";
 import axios from "axios";
 import { TodoType } from "../../types/todo";
 
-interface CreateToDoModalProps {
+type DetailType = {
+	id: number;
+	title: string;
+	user: UserType;
+};
+
+interface EditToDoModalProps {
 	isModalOpen: boolean;
 	handleOk: () => void;
 	handleCancel: () => void;
 	users: UserType[];
+	detail: DetailType;
 }
 
 type FieldType = {
@@ -17,22 +24,27 @@ type FieldType = {
 	userId?: number;
 };
 
-const CreateToDoModal: React.FC<CreateToDoModalProps> = ({
+const EditToDoModal: React.FC<EditToDoModalProps> = ({
 	isModalOpen,
 	handleOk,
 	handleCancel,
 	users,
+	detail,
 }) => {
 	const [form] = Form.useForm();
 	const [loading, setLoading] = useState(false);
+
+	useEffect(() => {
+		form.setFieldsValue({ title: detail.title, userId: detail.user.id });
+	}, [detail, form]);
 
 	const onFinish = async () => {
 		setLoading(true);
 		const { title, userId } = form.getFieldsValue();
 
 		try {
-			const response = await axios.post<TodoType>(
-				"https://jsonplaceholder.typicode.com/todos",
+			const response = await axios.put<TodoType>(
+				`https://jsonplaceholder.typicode.com/todos/${detail.id}`,
 				{
 					title: title,
 					userId: userId,
@@ -41,8 +53,8 @@ const CreateToDoModal: React.FC<CreateToDoModalProps> = ({
 
 			setLoading(false);
 			notification.success({
-				message: "Mock Task Created Successfully!",
-				description: `"${response.data.title}" has been created. Please note that this creation is "Mock" and won't update the todo list.`,
+				message: "Mock Task Edited Successfully!",
+				description: `"${response.data.title}" has been Edited. Please note that this creation is "Mock" and won't update the todo list.`,
 			});
 			form.resetFields();
 			handleOk();
@@ -67,7 +79,7 @@ const CreateToDoModal: React.FC<CreateToDoModalProps> = ({
 
 	return (
 		<Modal
-			title="New Task"
+			title="Edit Task"
 			open={isModalOpen}
 			onCancel={handleCancel}
 			footer={null}
@@ -127,4 +139,4 @@ const CreateToDoModal: React.FC<CreateToDoModalProps> = ({
 	);
 };
 
-export default CreateToDoModal;
+export default EditToDoModal;
