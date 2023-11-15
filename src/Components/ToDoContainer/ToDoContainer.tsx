@@ -82,6 +82,20 @@ const ToDoContainer: React.FC = () => {
 		}));
 	};
 
+	const isSearched =
+		currentFilters.title === "" &&
+		currentFilters.username === "" &&
+		currentFilters.completed === null;
+
+	const showLoading =
+		usersLoading ||
+		toDosLoading ||
+		(toDos.length > 0 && filteredToDos.length < 1 && isSearched);
+
+	const alignToDoContainer = !showLoading;
+
+	const showEmpty = users?.length > 0 && filteredToDos.length > 0;
+
 	return (
 		<div className="todo-container">
 			<div className="todo-container__header">
@@ -95,15 +109,13 @@ const ToDoContainer: React.FC = () => {
 			</div>
 			<div
 				className={
-					!usersLoading &&
-					!toDosLoading &&
-					(users?.length < 1 || filteredToDos.length < 1)
+					alignToDoContainer
 						? "todo-container__content todo-container__content--align-center"
 						: "todo-container__content"
 				}
 			>
 				<Row gutter={[16, 16]}>
-					{usersLoading && toDosLoading ? (
+					{showLoading ? (
 						<>
 							<Col md={12}>
 								<Card
@@ -120,7 +132,7 @@ const ToDoContainer: React.FC = () => {
 						</>
 					) : (
 						<>
-							{users?.length > 0 && filteredToDos.length > 0 ? (
+							{showEmpty ? (
 								filteredToDos.map((todo) => (
 									<Col md={12} key={todo.id}>
 										<ToDoCard {...todo} users={users} />
