@@ -92,7 +92,7 @@ const ToDoContainer: React.FC = () => {
 		toDosLoading ||
 		(toDos.length > 0 && filteredToDos.length < 1 && isSearched);
 
-	const alignToDoContainer = !showLoading;
+	const alignToDoContainer = !showLoading && filteredToDos.length < 1;
 
 	const showEmpty = users?.length > 0 && filteredToDos.length > 0;
 
