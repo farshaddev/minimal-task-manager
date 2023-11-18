@@ -79,6 +79,7 @@ const EditToDoModal: React.FC<EditToDoModalProps> = ({
 
 	return (
 		<Modal
+			data-testid="edit-todo-modal"
 			title="Edit Task"
 			open={isModalOpen}
 			onCancel={handleCancel}
