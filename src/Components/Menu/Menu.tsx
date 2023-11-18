@@ -1,27 +1,22 @@
 import React from "react";
 import Logo from "../Logo/Logo";
-import { MenuItems } from "./MenuItems";
+import { menuItems } from "./MenuItems";
 import "./Menu.scss";
+import MenuListItem from "./MenuListItem";
 
 const Menu: React.FC = () => {
 	return (
 		<aside className="menu">
 			<Logo />
 			<ul className="menu__list">
-				{MenuItems.map((item, index) => (
-					<li key={index}>
-						<a
-							className={`menu__list-link${
-								item.className ? ` ${item.className}` : ""
-							}`}
-							href={item.href}
-							target="_blank"
-							rel="noopener noreferrer"
-						>
-							{item.icon}
-							<span>{item.text}</span>
-						</a>
-					</li>
+				{menuItems.map((item, index) => (
+					<MenuListItem
+						index={index}
+						text={item.text}
+						icon={item.icon}
+						href={item.href}
+						className={item.className}
+					/>
 				))}
 			</ul>
 		</aside>
