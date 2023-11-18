@@ -49,6 +49,7 @@ const Filter: React.FC<FilterProps> = ({ users, onState, onUser, onClear }) => {
 				<div className="filter__inputs">
 					<Form.Item name="state" label="Filter by:">
 						<Switch
+							data-testid="state"
 							checkedChildren="Done"
 							unCheckedChildren="To-Do"
 							onChange={onState}
@@ -56,6 +57,7 @@ const Filter: React.FC<FilterProps> = ({ users, onState, onUser, onClear }) => {
 					</Form.Item>
 					<Form.Item name="assignment">
 						<Select
+							data-testid="assignment"
 							showSearch
 							placeholder="Assignment"
 							optionFilterProp="children"

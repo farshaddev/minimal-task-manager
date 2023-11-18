@@ -85,7 +85,7 @@ const CreateToDoModal: React.FC<CreateToDoModalProps> = ({
 					name="title"
 					rules={[{ required: true, message: "Please input your todo!" }]}
 				>
-					<Input />
+					<Input data-testid="form-todo-title" />
 				</Form.Item>
 				<Form.Item<FieldType>
 					label="Assign To"
@@ -98,6 +98,7 @@ const CreateToDoModal: React.FC<CreateToDoModalProps> = ({
 					]}
 				>
 					<Select
+						data-testid="assignment"
 						showSearch
 						placeholder="Assignment"
 						optionFilterProp="children"
@@ -114,6 +115,7 @@ const CreateToDoModal: React.FC<CreateToDoModalProps> = ({
 						Cancel
 					</Button>
 					<Button
+						data-testid="create-submit"
 						key="submit"
 						htmlType="submit"
 						type="primary"
