@@ -103,8 +103,8 @@ const ToDoContainer: React.FC = () => {
 		<div
 			className={
 				isMenuOpen
-					? "todo-container todo-container--menu-open"
-					: "todo-container"
+					? `todo-container ${showLoading ? "loading" : "loaded"}  todo-container--menu-open`
+					: `todo-container ${showLoading ? "loading" : "loaded"}`
 			}
 		>
 			<div className="todo-container__header">

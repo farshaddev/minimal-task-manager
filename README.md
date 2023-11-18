@@ -41,6 +41,12 @@ Execute Cypress tests to ensure the stability and functionality of the code:
 npm test
 ```
 
+For running tests in headless mode:
+
+```bash
+npm run consoletest
+```
+
 ## Contributing
 
 Feel free to contribute by opening issues, providing feedback, or submitting pull requests. Your input is highly appreciated!
