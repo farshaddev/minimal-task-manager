@@ -8,7 +8,7 @@ const users = [
 ];
 
 describe("Filter Component", () => {
-	it("Filter Component renders correctly", () => {
+	it("filter Component renders correctly", () => {
 		cy.mount(
 			<Filter
 				users={users}
@@ -34,7 +34,7 @@ describe("Filter Component", () => {
 		cy.get("button").contains("New Task").click();
 		cy.get('[data-testid="create-submit"]').click(); // Type the username
 	});
-	it("Create modal renders correctly", () => {
+	it("create modal renders correctly", () => {
 		cy.mount(
 			<CreateToDoModal
 				isModalOpen={true}
