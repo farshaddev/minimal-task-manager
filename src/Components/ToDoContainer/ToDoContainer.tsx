@@ -97,7 +97,7 @@ const ToDoContainer: React.FC = () => {
 	const showEmpty = users?.length > 0 && filteredToDos.length > 0;
 
 	return (
-		<div className="todo-container">
+		<div className={`todo-container ${showLoading ? "loading" : "loaded"}`}>
 			<div className="todo-container__header">
 				<Search title={currentFilters.title} onSearch={onSearch} />
 				<Filter
@@ -139,7 +139,7 @@ const ToDoContainer: React.FC = () => {
 									</Col>
 								))
 							) : (
-								<Col md={24}>
+								<Col md={24} data-testid="empty-message">
 									<Empty description="No to-dos available" />
 								</Col>
 							)}
