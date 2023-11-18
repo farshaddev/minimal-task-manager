@@ -4,7 +4,9 @@ describe("Edit ToDo E2E Test", () => {
 		cy.visit("http://localhost:3000");
 
 		// Await for loading
-		cy.get(".todo-container.loaded");
+		cy.get(".todo-container").should("have.class", "loaded", {
+			timeout: 10000,
+		});
 
 		// Check for the existence of todo cards
 		cy.get(".todo-container__content .ant-row .ant-col").should("exist");

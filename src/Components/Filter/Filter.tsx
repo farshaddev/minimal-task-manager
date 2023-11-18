@@ -77,7 +77,7 @@ const Filter: React.FC<FilterProps> = ({ users, onState, onUser, onClear }) => {
 				</div>
 				<Button onClick={showModal} type="primary">
 					<FaPlus />
-					<span>New Task</span>
+					<span className="create-btn_label">New Task</span>
 				</Button>
 			</Form>
 			<CreateToDoModal

@@ -1,0 +1,36 @@
+.menu-toggle {
+	&__btn {
+		display: flex;
+		height: 100%;
+		width: 4em;
+		border: 0;
+		background: #1677ffbf;
+		flex-direction: column;
+		padding: 0.8em;
+		justify-content: center;
+		gap: 0.6em;
+		cursor: pointer;
+
+		&-line {
+			height: 0.2em;
+			width: 100%;
+			background: #ffffff;
+			border-radius: 1em;
+			transition: all 0.2s ease-in;
+		}
+
+		&--open {
+			> span {
+				&:first-child {
+					transform: rotate(45deg) translate(7px, 8px);
+				}
+				&:nth-child(2) {
+					opacity: 0;
+				}
+				&:last-child {
+					transform: rotate(-45deg) translate(7px, -8px);
+				}
+			}
+		}
+	}
+}

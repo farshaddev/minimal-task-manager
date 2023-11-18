@@ -3,7 +3,9 @@ describe("Create ToDo E2E Test", () => {
 		// Visit the homepage only once before any test
 		cy.visit("http://localhost:3000");
 		// Await for loading
-		cy.get(".todo-container.loaded");
+		cy.get(".todo-container").should("have.class", "loaded", {
+			timeout: 10000,
+		});
 	});
 
 	it("Should create a new task", () => {

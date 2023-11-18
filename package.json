@@ -16,12 +16,12 @@
 		"start": "react-scripts start",
 		"build": "react-scripts build",
 		"test": "npx cypress open",
+		"consoletest": "npx cypress run",
 		"eject": "react-scripts eject"
 	},
 	"eslintConfig": {
 		"extends": [
-			"react-app",
-			"react-app/jest"
+			"react-app"
 		]
 	},
 	"browserslist": {

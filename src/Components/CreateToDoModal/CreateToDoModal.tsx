@@ -56,10 +56,6 @@ const CreateToDoModal: React.FC<CreateToDoModalProps> = ({
 		console.log("Failed:", errorInfo);
 	};
 
-	const onChange = (value: string) => {
-		console.log(value);
-	};
-
 	const filterOption = (
 		input: string,
 		option?: { label: string; value: number } | undefined
@@ -102,7 +98,6 @@ const CreateToDoModal: React.FC<CreateToDoModalProps> = ({
 						showSearch
 						placeholder="Assignment"
 						optionFilterProp="children"
-						onChange={onChange}
 						filterOption={filterOption}
 						options={users.map((user) => ({
 							value: user.id,

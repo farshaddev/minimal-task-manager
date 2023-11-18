@@ -2,11 +2,14 @@ import React from "react";
 import Logo from "../Logo/Logo";
 import { menuItems } from "./MenuItems";
 import "./Menu.scss";
+import { useMenu } from "../../contexts/MenuContext";
 import MenuListItem from "./MenuListItem";
 
 const Menu: React.FC = () => {
+	const { isMenuOpen } = useMenu();
+
 	return (
-		<aside className="menu">
+		<aside className={isMenuOpen ? "menu menu--open" : "menu"}>
 			<Logo />
 			<ul className="menu__list">
 				{menuItems.map((item, index) => (
