@@ -98,7 +98,7 @@ const EditToDoModal: React.FC<EditToDoModalProps> = ({
 					name="title"
 					rules={[{ required: true, message: "Please input your todo!" }]}
 				>
-					<Input />
+					<Input data-testid="form-todo-title" />
 				</Form.Item>
 				<Form.Item<FieldType>
 					label="Assign To"
@@ -127,6 +127,7 @@ const EditToDoModal: React.FC<EditToDoModalProps> = ({
 						Cancel
 					</Button>
 					<Button
+						data-testid="edit-submit"
 						key="submit"
 						htmlType="submit"
 						type="primary"
