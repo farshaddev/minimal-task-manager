@@ -2,6 +2,10 @@
 
 Minimal Task Manager is a simple yet powerful to-do list application built with React, showcasing advanced skills in frontend development. The project incorporates CRUD operations, dynamic search, and filtering capabilities, utilizing a fake API to emulate real-world data interactions.
 
+## Developer Note
+
+The developer's Node.js version for this project is v18.15.0.
+
 ## Features
 
 - **CRUD Operations:** Seamlessly create, read, update, and delete tasks with an intuitive interface.
@@ -44,7 +48,7 @@ npm test
 For running tests in headless mode:
 
 ```bash
-npm run consoletest
+npm run headlesstest
 ```
 
 ## Contributing
