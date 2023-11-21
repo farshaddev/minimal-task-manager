@@ -14,7 +14,7 @@ const Menu: React.FC = () => {
 			<ul className="menu__list">
 				{menuItems.map((item, index) => (
 					<MenuListItem
-						index={index}
+						key={`${item.text}-${index}`}
 						text={item.text}
 						icon={item.icon}
 						href={item.href}
