@@ -11,7 +11,6 @@ The developer's Node.js version for this project is v18.15.0.
 - **CRUD Operations:** Seamlessly create, read, update, and delete tasks with an intuitive interface.
 - **Search and Filtering:** Efficiently organize your tasks through dynamic search and filtering functionalities.
 - **UI Components with Ant Design:** The project employs Ant Design for sleek and responsive UI components, enhancing the user experience.
-- **Local Storage Integration:** All your to-dos are persistently stored in the local storage, ensuring data retention across sessions.
 - **BEM CSS Convention:** Embracing the BEM (Block, Element, Modifier) CSS convention for clear and maintainable styling.
 - **Cypress Testing:** Rigorous testing with Cypress to ensure code reliability and maintainability.
 
