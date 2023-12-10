@@ -35,10 +35,18 @@
 			&--github,
 			&--linkedin,
 			&--gmail,
+			&--whatsapp,
+			&--site,
 			&--telegram {
 				flex: none;
 			}
 
+			&--site {
+				color: #3498db;
+			}
+			&--whatsapp {
+				color: #075e54;
+			}
 			&--github {
 				color: #196127;
 			}
